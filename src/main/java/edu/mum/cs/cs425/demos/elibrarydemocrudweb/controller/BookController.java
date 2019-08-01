@@ -2,6 +2,8 @@ package edu.mum.cs.cs425.demos.elibrarydemocrudweb.controller;
 
 import edu.mum.cs.cs425.demos.elibrarydemocrudweb.model.Book;
 import edu.mum.cs.cs425.demos.elibrarydemocrudweb.service.BookService;
+
+import org.dom4j.util.AttributeHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -21,9 +24,10 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping(value = {"/elibrary/book/list"})
-    public ModelAndView listBooks() {
+    public ModelAndView listBooks(@RequestParam(defaultValue = "0") int pageno) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("books", bookService.getAllBooks());
+		modelAndView.addObject("books", bookService.getAllBooksPaged(pageno));
+        modelAndView.addObject("currentPage", pageno);
         modelAndView.setViewName("book/list");
         return modelAndView;
     }
