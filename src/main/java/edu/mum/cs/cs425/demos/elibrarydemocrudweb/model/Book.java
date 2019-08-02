@@ -12,6 +12,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bookId;
+    
     //@UniqueISBN
     @NotBlank(message = "* ISBN is required")
     @Column(name = "isbn", nullable = false, unique = true)
