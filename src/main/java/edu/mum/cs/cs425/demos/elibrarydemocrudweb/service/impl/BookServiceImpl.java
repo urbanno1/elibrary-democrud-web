@@ -24,6 +24,15 @@ public class BookServiceImpl implements BookService {
     @Override
     public Iterable<Book> getAllBooks() {
         return repository.findAll(Sort.by("title"));
+//        return ((List<Book>)repository.findAll())
+//                .stream()
+//                .sorted(Comparator.comparing(Book::getTitle))
+//                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<Book> getAllBooksPaged(int pageNo) {
+        return repository.findAll(PageRequest.of(pageNo, 3, Sort.by("title")));
     }
 
     @Override
