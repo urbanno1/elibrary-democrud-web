@@ -32,7 +32,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Page<Book> getAllBooksPaged(int pageNo) {
-        return repository.findAll(PageRequest.of(pageNo, 3, Sort.by("title")));
+        return repository.findAll(PageRequest.of(pageNo, 2, Sort.by("title")));
     }
 
     @Override
@@ -49,10 +49,5 @@ public class BookServiceImpl implements BookService {
     public void deleteBookById(Integer bookId) {
         repository.deleteById(bookId);
     }
-
-	@Override
-	public Page<Book> getAllBooksPaged(int pageNo) {
-		return repository.findAll(PageRequest.of(pageNo, 2, Sort.by("title")));
-	}
 
 }
