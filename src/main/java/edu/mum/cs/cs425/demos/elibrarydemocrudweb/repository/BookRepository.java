@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface BookRepository extends PagingAndSortingRepository<Book, Integer> {
 	
 	Optional<Book>  findByIsbn(String isbn);
+	
+	Optional<Book> searchThefields(String query);
 }
